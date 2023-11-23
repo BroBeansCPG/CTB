@@ -1,15 +1,15 @@
 #include "script_component.hpp"
 
 class CfgPatches {
-	class ADDON {
-		name = CSTRING(component);
-		units[] = {};
-		weapons[] = {};
-		requiredVersion = REQUIRED_VERSION;
-		requiredAddons[] = {"ctb_main"};
-		author = "CTBois";
-		VERSION_CONFIG;
-	};
+  class ADDON {
+    name = CSTRING(component);
+    units[] = {};
+    weapons[] = {};
+    requiredVersion = REQUIRED_VERSION;
+    requiredAddons[] = {"ctb_main", "rhs_c_bmp"};
+    author = "CTBois";
+    VERSION_CONFIG;
+  };
 };
 
 class Extended_PreStart_EventHandlers {
@@ -29,3 +29,5 @@ class Extended_PostInit_EventHandlers {
         init = QUOTE(call COMPILE_FILE(XEH_postInit));
     };
 };
+
+#include "cfgVehicles.hpp"
