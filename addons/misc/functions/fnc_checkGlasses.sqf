@@ -1,3 +1,4 @@
+if !(hasInterface) exitWith {};
 
 _blacklist = ctb_noGlasses;
 _blacklist = toLower _blacklist; 
