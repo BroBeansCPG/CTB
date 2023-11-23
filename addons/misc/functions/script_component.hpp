@@ -1,0 +1,1 @@
+#include "\z\ctb\addons\misc\script_component.hpp"

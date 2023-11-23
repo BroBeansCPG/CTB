@@ -1,0 +1,11 @@
+name = "Combat Team Bravo - Mods"
+author = "CTBois"
+prefix = "ctb"
+mainprefix = "z"
+
+[files]
+exclude = [
+    "*.psd",        # By default this list is empty
+    "*.md",
+    "*.png",
+]
