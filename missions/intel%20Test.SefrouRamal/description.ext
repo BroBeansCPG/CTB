@@ -1,0 +1,16 @@
+class CfgFunctions
+{
+	class bb
+	{
+		class misc
+		{
+			class processIntel {};
+			class isCopilot {};
+			class addPilotRestrictions {};
+			class processPuc {};
+			class addIntelToPuc {};
+			class startHunt {};
+			class processBodyBag {};
+		};
+	};
+};
