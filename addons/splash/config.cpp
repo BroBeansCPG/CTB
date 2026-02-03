@@ -18,7 +18,7 @@ class CfgMainMenuSpotlight
 	{
 		text = "";
         picture = QPATHTOF(data\MissionPlanLogo.paa);
-		action = "connectToServer ['103.62.51.7', 2652, 'pizza']";
+		action = "connectToServer ['103.62.51.131', 2652, 'pizza']";
 		actionText = "Join the CTB Mission Server";
 		condition = "true";
 	};
