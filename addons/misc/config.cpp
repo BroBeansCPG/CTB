@@ -6,7 +6,7 @@ class CfgPatches {
     units[] = {};
     weapons[] = {};
     requiredVersion = REQUIRED_VERSION;
-    requiredAddons[] = {"ctb_main", "rhs_c_bmp"};
+    requiredAddons[] = {"ctb_main", "rhs_c_bmp", "Blastcore_MainCore"};
     author = "CTBois";
     VERSION_CONFIG;
   };
