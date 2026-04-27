@@ -1,0 +1,12 @@
+name = "CTB - Misc Mods";
+//picture = "logo_vtx_ca.paa";
+actionName = "Find Us";
+//action = "https://uh-60m.gitbook.io/workspace/guides/getting-started";
+description = "CTB - Mods";
+//logo = "logo_vtx_ca.paa";
+//logoOver = "logo_vtx_ca.paa";
+tooltip = "CTB - Mods";
+tooltipOwned = "CTB - Mods";
+overview = "CTB - Mods";
+author = "CTB";
+//overviewPicture = "logo_vtx_ca.paa";

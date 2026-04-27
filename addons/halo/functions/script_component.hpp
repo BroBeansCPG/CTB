@@ -1,0 +1,1 @@
+#include "\z\ctb\addons\halo\script_component.hpp"
