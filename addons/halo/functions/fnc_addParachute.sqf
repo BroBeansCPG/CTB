@@ -1,33 +1,35 @@
-params ["_unit"];
+params ["_unit", "_plane"];
 
-// 1. Check if unit has a backpack
 private _backpackType = backpack _unit;
 if (_backpackType == "") exitWith { 
     _unit addBackpack "B_Parachute"; 
-    diag_log "No backpack to save, added parachute.";
 };
 
-// 2. Store all items and their specific containers/states
-// getBackpackCargo is okay, but combinations of items/magazines/weapons are best handled via:
 private _backpackItems = backpackItems _unit;
 
-// 3. Remove backpack and add parachute
+
 removeBackpack _unit;
 _unit addBackpack "B_Parachute";
+[_unit, _plane] spawn {
+    params ["_unit", "_plane"];
+    waitUntil { !(isTouchingGround _unit) };
+    _unit allowDamage false;
 
-// 4. Wait until the unit is on the ground
-// Using a spawn to prevent halting the main script execution
+    private _velocityVector = _plane vectorModelToWorld [0, -35, 0];
+    _unit setVelocity _velocityVector;
+};
+
 [_unit, _backpackType, _backpackItems] spawn {
     params ["_unit", "_type", "_items"];
     
-    // Wait until unit is lower than 1m or speed is 0 (landed)
     waitUntil { 
         isNull objectParent _unit && 
-        { (isTouchingGround _unit) && ((getPos _unit # 2) < 5) } 
+        { (((isTouchingGround _unit) && (getPosATL _unit # 2) < 2)) or ((getPosASL _unit # 2) <2) } 
     };
     
     // Small delay to ensure landing animation finishes
     sleep 2;
+    _unit allowDamage true;
     
     // 5. Restore the original backpack
     removeBackpack _unit;
@@ -38,5 +40,4 @@ _unit addBackpack "B_Parachute";
         _unit addItemToBackpack _x;
     } forEach _items;
     
-    hint "Backpack restored with items.";
 };
