@@ -12,7 +12,7 @@ private _dir = direction _plane;
         private _planePos = _allPositions # _forEachIndex;
         
         _x attachTo [_plane, _planePos]; 
-        _x setDir _dir;
+        _x setDir (_dir - 180);
 
         [_x, _plane] call ctb_halo_fnc_addParachute; 
         detach _x; 
