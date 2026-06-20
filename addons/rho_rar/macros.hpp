@@ -1,6 +1,6 @@
 #include "\BettIR_Attachments\compat\core\macros.hpp"
 
-#define BETTIR_DEFAULT_PEQ15(BASECLASS) \
+#define BETTIR_DEFAULT_PEQ15_CFGWEAPONS(BASECLASS) \
     class BASECLASS##_al: BASECLASS { \
         scope = 1; \
         class itemInfo: itemInfo { \
@@ -171,3 +171,39 @@
             }; \
         }; \
     };
+
+
+#define BETTIR_DEFAULT_PEQ15_RAILS(BASECLASS) \
+    BASECLASS##=1; \
+    BASECLASS##_light=1; \
+    BASECLASS##_al=1; \
+    BASECLASS##_vis=1; \
+    BASECLASS##_DL_25MRAD=1; \
+    BASECLASS##_IH_25MRAD=1; \
+    BASECLASS##_DH_25MRAD=1; \
+    BASECLASS##_DL_50MRAD=1; \
+    BASECLASS##_IH_50MRAD=1; \
+    BASECLASS##_DH_50MRAD=1; \
+    BASECLASS##_DL_75MRAD=1; \
+    BASECLASS##_IH_75MRAD=1; \
+    BASECLASS##_DH_75MRAD=1; \
+    BASECLASS##_DL_100MRAD=1; \
+    BASECLASS##_IH_100MRAD=1; \
+    BASECLASS##_DH_100MRAD=1; 
+
+#define BETTIR_DEFAULT_PEQ15_BETTIRCONFIG(BASECLASS) \
+    class BASECLASS##_light: BASECLASS {};  \
+    class BASECLASS##_vis: BASECLASS {}; \
+    class BASECLASS##_al: BASECLASS {};  \
+    class BASECLASS##_DL_25MRAD: BASECLASS {};  \
+    class BASECLASS##_IH_25MRAD: BASECLASS {};  \
+    class BASECLASS##_DH_25MRAD: BASECLASS {};  \
+    class BASECLASS##_DL_50MRAD: BASECLASS {};  \
+    class BASECLASS##_IH_50MRAD: BASECLASS {};  \
+    class BASECLASS##_DH_50MRAD: BASECLASS {};  \
+    class BASECLASS##_DL_75MRAD: BASECLASS {};  \
+    class BASECLASS##_IH_75MRAD: BASECLASS {};  \
+    class BASECLASS##_DH_75MRAD: BASECLASS {};  \
+    class BASECLASS##_DL_100MRAD: BASECLASS {}; \
+    class BASECLASS##_IH_100MRAD: BASECLASS {}; \
+    class BASECLASS##_DH_100MRAD: BASECLASS {}; 

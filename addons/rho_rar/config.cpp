@@ -17,12 +17,20 @@ class CfgPatches {
 class CfgFunctions {
     class ctb_rho_rar {
         class Core {
-            class composeClass {
-                file = QPATHTOF(functions\fnc_composeClass.sqf);
+            class peq15_composeClass {
+                file = QPATHTOF(functions\fnc_peq15_composeClass.sqf);
             };
 
-            class parseClass {
-                file = QPATHTOF(functions\fnc_parseClass.sqf);
+            class peq15_parseClass {
+                file = QPATHTOF(functions\fnc_peq15_parseClass.sqf);
+            };
+
+            class peq16_fnc_composeClass {
+                file = QPATHTOF(functions\fnc_peq16_composeClass.sqf);
+            };
+
+            class peq16_fnc_parseClass {
+                file = QPATHTOF(functions\fnc_peq16_parseClass.sqf);
             };
         };
     };
@@ -31,35 +39,52 @@ class CfgFunctions {
 class BettIR_Config {
     class CompatibleAttachments {
         // provide some inheritance information
-        class BettIR_Base_PEQ15;
+        class BettIR_Base_DBALA2;
+        class BettIR_Base_PEQ15: BettIR_Base_DBALA2 {
+            class configurable;
+        };
         class BettIR_Base_PEQ15_GenericFlashlightCombo: BettIR_Base_PEQ15 {
-            class Configurable;
+            class configurable;
         };
 
         class rho_rar_nad_ir : BettIR_Base_PEQ15_GenericFlashlightCombo {
             macroClass = "rho_rar_nad_ir";
 
-            classParser="ctb_rho_rar_fnc_parseClass";
-            classComposer="ctb_rho_rar_fnc_composeClass";
+            classParser="ctb_rho_rar_fnc_peq15_parseClass";
+            classComposer="ctb_rho_rar_fnc_peq15_composeClass";
         };
-        class rho_rar_nad_ir_light: rho_rar_nad_ir {};
 
-        class rho_rar_nad_ir_DL_25MRAD: rho_rar_nad_ir {};
-        class rho_rar_nad_ir_IH_25MRAD: rho_rar_nad_ir {};
-        class rho_rar_nad_ir_DH_25MRAD: rho_rar_nad_ir {};
+        BETTIR_DEFAULT_PEQ15_BETTIRCONFIG(rho_rar_nad_ir)
 
-        class rho_rar_nad_ir_DL_50MRAD: rho_rar_nad_ir {};
-        class rho_rar_nad_ir_IH_50MRAD: rho_rar_nad_ir {};
-        class rho_rar_nad_ir_DH_50MRAD: rho_rar_nad_ir {};
-
-        class rho_rar_nad_ir_DL_75MRAD: rho_rar_nad_ir {};
-        class rho_rar_nad_ir_IH_75MRAD: rho_rar_nad_ir {};
-        class rho_rar_nad_ir_DH_75MRAD: rho_rar_nad_ir {};
-
-        class rho_rar_nad_ir_DL_100MRAD: rho_rar_nad_ir {};
-        class rho_rar_nad_ir_IH_100MRAD: rho_rar_nad_ir {};
-        class rho_rar_nad_ir_DH_100MRAD: rho_rar_nad_ir {};
-
+        class rho_rar_peq16b_top_ir : BettIR_Base_PEQ15 {
+            macroClass = "rho_rar_peq16b_top_ir";
+            classParser = "ctb_rho_rar_fnc_peq16_fnc_parseClass";
+            classComposer = "ctb_rho_rar_fnc_peq16_fnc_composeClass";
+        
+            class configurable : configurable {
+                class MasterMode {
+                    displayName = "Master Mode";
+                    defaultValue = "AH";
+                    class VIS   { displayName = "VIS Laser HI"; };
+                    class LIGHT { displayName = "VIS Light"; };
+                    class DVIS  { displayName = "VIS Dual"; };
+                    class AL    { displayName = "Aim Low"; };
+                    class DL    { displayName = "Dual Low"; };
+                    class AH    { displayName = "Aim High"; };
+                    class DH    { displayName = "Dual High"; };
+                };
+                class Focus {
+                    displayName = "Illuminator Divergence";
+                    defaultValue = "100RAD";
+                    class 25MRAD  { displayName = "25 MRAD"; };
+                    class 50MRAD  { displayName = "50 MRAD"; };
+                    class 75MRAD  { displayName = "75 MRAD"; };
+                    class 100RAD { displayName = "100 MRAD"; };
+                };
+            };
+        };
+        BETTIR_DEFAULT_PEQ15_BETTIRCONFIG(rho_rar_peq16b_top_ir)
+        class rho_rar_peq16b_top_ir_dvis: rho_rar_peq16b_top_ir_light {};
     };
 };
 
@@ -85,7 +110,26 @@ class cfgWeapons {
             };
         };
     };
-    BETTIR_DEFAULT_PEQ15(rho_rar_nad_ir)
+    BETTIR_DEFAULT_PEQ15_CFGWEAPONS(rho_rar_nad_ir)
+    class rho_rar_peq16b_top_ir: acc_pointer_IR {
+        class ItemInfo: ItemInfo {
+            class Pointer: Pointer {
+                BETTIR_IR_LASER_PRESET_DBAL_A2
+            };
+        };
+    };
+    BETTIR_DEFAULT_PEQ15_CFGWEAPONS(rho_rar_peq16b_top_ir)
+    class rho_rar_peq16b_top_ir_dvis: rho_rar_peq16b_top_ir_light {
+        class ItemInfo: ItemInfo {
+            // no pointer to inherit from in the light config
+            class Pointer: Pointer {
+                irLaserPos="laser pos";
+                irLaserEnd="laser dir";
+                BETTIR_VIS_LASER_PRESET_DBAL_A2_RED
+            };
+            class Flashlight;
+        };
+    };
 };
 
 class asdg_slotInfo;
@@ -93,19 +137,8 @@ class asdg_FrontSideRail: asdg_slotInfo
 {
 	class compatibleItems
 	{
-		rho_rar_nad_ir=1;
-        rho_rar_nad_ir_light=1;
-        rho_rar_nad_ir_DL_25MRAD=1;
-        rho_rar_nad_ir_IH_25MRAD=1;
-        rho_rar_nad_ir_DH_25MRAD=1;
-        rho_rar_nad_ir_DL_50MRAD=1;
-        rho_rar_nad_ir_IH_50MRAD=1;
-        rho_rar_nad_ir_DH_50MRAD=1;
-        rho_rar_nad_ir_DL_75MRAD=1;
-        rho_rar_nad_ir_IH_75MRAD=1;
-        rho_rar_nad_ir_DH_75MRAD=1;
-        rho_rar_nad_ir_DL_100MRAD=1;
-        rho_rar_nad_ir_IH_100MRAD=1;
-        rho_rar_nad_ir_DH_100MRAD=1;
+		BETTIR_DEFAULT_PEQ15_RAILS(rho_rar_nad_ir)
+        BETTIR_DEFAULT_PEQ15_RAILS(rho_rar_peq16b_top_ir)
+        rho_rar_peq16b_top_ir_dvis=1;
 	};
 };

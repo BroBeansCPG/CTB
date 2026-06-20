@@ -1,7 +1,5 @@
 params ["_composableMap"];
 
-systemChat format ["[BettIR Compat] Composing class with map: %1", _composableMap];
-
 _masterMode = _composableMap get "MasterMode";
 _focus = _composableMap getOrDefault ["Focus", "100MRAD"];
 _macro = _composableMap get "__BETTIR_MACRO";
