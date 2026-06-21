@@ -139,43 +139,11 @@
                 BETTIR_ILLUMINATOR_PRESET_PEQ15(100,"laser pos","laser dir",0) \
             }; \
         }; \
-    }; \
- \
-    class BASECLASS##_light: BASECLASS { \
-        scope = 1; \
-        class ItemInfo: InventoryFlashLightItem_Base_F { \
-            mass=5; \
-            class FlashLight {\
-                color[]={7000,7500,10000}; \
-                ambient[]={6,9,9}; \
-                intensity=1.5; \
-                size=1; \
-                innerAngle=20; \
-                outerAngle=75; \
-                coneFadeCoef=10; \
-                position="flash dir"; \
-                direction="flash"; \
-                useFlare=1; \
-                flareSize=1.5; \
-                flareMaxDistance="500.0f"; \
-                dayLight=1; \
-                class Attenuation {\
-                    start=0.5; \
-                    constant=0; \
-                    linear=0; \
-                    quadratic=1; \
-                    hardLimitStart=200; \
-                    hardLimitEnd=300; \
-                }; \
-                scale[]={0}; \
-            }; \
-        }; \
-    };
+    }; 
 
 
 #define BETTIR_DEFAULT_PEQ15_RAILS(BASECLASS) \
     BASECLASS##=1; \
-    BASECLASS##_light=1; \
     BASECLASS##_al=1; \
     BASECLASS##_vis=1; \
     BASECLASS##_DL_25MRAD=1; \
@@ -192,7 +160,6 @@
     BASECLASS##_DH_100MRAD=1; 
 
 #define BETTIR_DEFAULT_PEQ15_BETTIRCONFIG(BASECLASS) \
-    class BASECLASS##_light: BASECLASS {};  \
     class BASECLASS##_vis: BASECLASS {}; \
     class BASECLASS##_al: BASECLASS {};  \
     class BASECLASS##_DL_25MRAD: BASECLASS {};  \

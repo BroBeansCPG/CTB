@@ -53,6 +53,7 @@ class BettIR_Config {
             classParser="ctb_rho_rar_fnc_peq15_parseClass";
             classComposer="ctb_rho_rar_fnc_peq15_composeClass";
         };
+        class rho_rar_nad_ir_light: rho_rar_nad_ir {};
 
         BETTIR_DEFAULT_PEQ15_BETTIRCONFIG(rho_rar_nad_ir)
 
@@ -84,13 +85,30 @@ class BettIR_Config {
             };
         };
         BETTIR_DEFAULT_PEQ15_BETTIRCONFIG(rho_rar_peq16b_top_ir)
+        class rho_rar_peq16b_top_ir_light: rho_rar_peq16b_top_ir {};
         class rho_rar_peq16b_top_ir_dvis: rho_rar_peq16b_top_ir_light {};
+
+        class rho_rar_peq16b_wml_ir : rho_rar_peq16b_top_ir {
+            macroClass = "rho_rar_peq16b_wml_ir";
+        };
+        BETTIR_DEFAULT_PEQ15_BETTIRCONFIG(rho_rar_peq16b_wml_ir)
+        class rho_rar_peq16b_wml_ir_light: rho_rar_peq16b_wml_ir {};
+        class rho_rar_peq16b_wml_ir_dvis: rho_rar_peq16b_wml_ir_light {};
+
+        class rho_rar_l3srf_top_ir: rho_rar_nad_ir {
+            macroClass = "rho_rar_l3srf_top_ir";
+        };
+        BETTIR_DEFAULT_PEQ15_BETTIRCONFIG(rho_rar_l3srf_top_ir)
+        class rho_rar_l3srf_wml_ir: rho_rar_nad_ir {
+            macroClass = "rho_rar_l3srf_wml_ir";
+        };
+        class rho_rar_l3srf_wml_ir_light: rho_rar_l3srf_wml_ir {};
+        BETTIR_DEFAULT_PEQ15_BETTIRCONFIG(rho_rar_l3srf_wml_ir)
     };
 };
 
 class cfgWeapons {
     class ItemCore;
-    class acc_flashlight;
 
     class InventoryFlashLightItem_Base_F {
         class Flashlight;
@@ -102,7 +120,21 @@ class cfgWeapons {
             class Pointer;
         };
     };
+    class acc_flashlight: ItemCore {
+		class ItemInfo;
+	};
+    class rho_rar_nad_torch;
+    class rho_rar_peq16b_top_torch: acc_flashlight {
+        class ItemInfo: ItemInfo {};
+    };
+    class rho_rar_peq16b_wml_torch: acc_flashlight {
+        class ItemInfo: ItemInfo {};
+    };
+    class rho_rar_l3srf_wml_torch: acc_flashlight {
+        class ItemInfo: ItemInfo {};
+    };
 
+    //NAD + Torch
     class rho_rar_nad_ir: acc_pointer_IR {
         class ItemInfo: ItemInfo {
             class Pointer: Pointer {
@@ -110,7 +142,9 @@ class cfgWeapons {
             };
         };
     };
+    class rho_rar_nad_ir_light: rho_rar_nad_torch {};
     BETTIR_DEFAULT_PEQ15_CFGWEAPONS(rho_rar_nad_ir)
+    //PEQ16B TOP
     class rho_rar_peq16b_top_ir: acc_pointer_IR {
         class ItemInfo: ItemInfo {
             class Pointer: Pointer {
@@ -118,8 +152,36 @@ class cfgWeapons {
             };
         };
     };
-    BETTIR_DEFAULT_PEQ15_CFGWEAPONS(rho_rar_peq16b_top_ir)
+    class rho_rar_peq16b_top_ir_light: rho_rar_peq16b_top_torch {
+        class itemInfo: itemInfo {
+            class Pointer;
+        };
+    };
     class rho_rar_peq16b_top_ir_dvis: rho_rar_peq16b_top_ir_light {
+        class ItemInfo: ItemInfo {
+            class Pointer: Pointer {
+                irLaserPos="laser pos";
+                irLaserEnd="laser dir";
+                BETTIR_VIS_LASER_PRESET_DBAL_A2_RED
+            };
+            class Flashlight;
+        };
+    };
+    BETTIR_DEFAULT_PEQ15_CFGWEAPONS(rho_rar_peq16b_top_ir)
+    //PEQ16B WML
+    class rho_rar_peq16b_wml_ir: acc_pointer_IR {
+        class ItemInfo: ItemInfo {
+            class Pointer: Pointer {
+                BETTIR_IR_LASER_PRESET_DBAL_A2
+            };
+        };
+    };
+    class rho_rar_peq16b_wml_ir_light: rho_rar_peq16b_wml_torch {
+        class itemInfo: itemInfo {
+            class Pointer;
+        };
+    };
+    class rho_rar_peq16b_wml_ir_dvis: rho_rar_peq16b_wml_ir_light {
         class ItemInfo: ItemInfo {
             // no pointer to inherit from in the light config
             class Pointer: Pointer {
@@ -130,6 +192,31 @@ class cfgWeapons {
             class Flashlight;
         };
     };
+    BETTIR_DEFAULT_PEQ15_CFGWEAPONS(rho_rar_peq16b_wml_ir)
+    //L3SRF TOP
+    class rho_rar_l3srf_top_ir: acc_pointer_IR {
+        class ItemInfo: ItemInfo {
+            class Pointer: Pointer {
+                BETTIR_IR_LASER_PRESET_DBAL_A2
+            };
+        };
+    };
+    BETTIR_DEFAULT_PEQ15_CFGWEAPONS(rho_rar_l3srf_top_ir)
+
+    //L3SRF WML
+    class rho_rar_l3srf_wml_ir: acc_pointer_IR {
+        class ItemInfo: ItemInfo {
+            class Pointer: Pointer {
+                BETTIR_IR_LASER_PRESET_DBAL_A2
+            };
+        };
+    };
+    class rho_rar_l3srf_wml_ir_light: rho_rar_l3srf_wml_torch {
+        class itemInfo: itemInfo {
+            class Pointer;
+        };
+    };
+    BETTIR_DEFAULT_PEQ15_CFGWEAPONS(rho_rar_l3srf_wml_ir)
 };
 
 class asdg_slotInfo;
@@ -139,6 +226,13 @@ class asdg_FrontSideRail: asdg_slotInfo
 	{
 		BETTIR_DEFAULT_PEQ15_RAILS(rho_rar_nad_ir)
         BETTIR_DEFAULT_PEQ15_RAILS(rho_rar_peq16b_top_ir)
+        rho_rar_peq16b_top_ir_light=1;
         rho_rar_peq16b_top_ir_dvis=1;
+        BETTIR_DEFAULT_PEQ15_RAILS(rho_rar_peq16b_wml_ir)
+        rho_rar_peq16b_wml_ir_light=1;
+        rho_rar_peq16b_wml_ir_dvis=1;
+        BETTIR_DEFAULT_PEQ15_RAILS(rho_rar_l3srf_top_ir)
+        BETTIR_DEFAULT_PEQ15_RAILS(rho_rar_l3srf_wml_ir)
+        rho_rar_l3srf_wml_ir_light=1;
 	};
 };
