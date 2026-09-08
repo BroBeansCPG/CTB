@@ -38,4 +38,26 @@ class cfgAmmo {
 			Hit_Foliage_Pine="BCImpactDirt_30mm";
 		};
 	};
+	class missileBase;
+	class rhs_ammo_DAGR: missileBase
+	{
+		class ace_missileguidance {
+			enabled = 1;
+			attackProfiles[] = {"LIN","DIR","MID","HI"};
+			canVanillaLock = 0;
+			defaultAttackProfile = "LIN";
+			defaultNavigationType = "AugmentedProportionalNavigation";
+			defaultSeekerLockMode = "LOAL";
+			defaultSeekerType = "SALH";
+			navigationTypes[] = {"AugmentedProportionalNavigation"};
+			pitchRate = 40;
+			seekerAccuracy = 1;
+			seekerAngle = 90;
+			seekerLockModes[] = {"LOAL","LOBL"};
+			seekerMaxRange = 3500;
+			seekerMinRange = 1;
+			seekerTypes[] = {"SALH"};
+			yawRate = 40;
+		};
+	};
 };
