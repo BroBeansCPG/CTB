@@ -2,6 +2,10 @@ class cfgVehicles {
   class Tank;
   class Car_F;
   class rhs_bmp_base;
+  class rhsusf_stryker_base;
+  class APC_Tracked_03_base_F;
+  class APC_Tracked_02_base_F;
+
   class Tank_F: Tank {
 	  ace_hunterkiller = 1;
   };
@@ -13,6 +17,15 @@ class cfgVehicles {
   };
   class rhs_bmp1_vdv: rhs_bmp_base {
     ace_hunterkiller[] = {{{0}, 1}, {{0,0}, 1}};
+  };
+  class rhsusf_stryker_m1126_base: rhsusf_stryker_base {
+	cargoDoors[] = {};
+  };
+  class RHS_M2A2_Base: APC_Tracked_03_base_F {
+	cargoDoors[] = {};
+  };
+  class rhsusf_m113tank_base: APC_Tracked_02_base_F {
+	cargoDoors[] = {};
   };
 };
 class cfgAmmo {
